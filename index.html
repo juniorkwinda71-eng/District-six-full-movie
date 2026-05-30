@@ -25,12 +25,18 @@ body{
 
 #homePage{
     height:100vh;
+    padding:20px;
+
     background:
-    linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,.88)),
+    linear-gradient(
+        rgba(0,0,0,.25),
+        rgba(0,0,0,.65)
+    ),
     url("https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?q=80&w=1600&auto=format&fit=crop");
 
     background-size:cover;
     background-position:center;
+    background-repeat:no-repeat;
 
     display:flex;
     justify-content:center;
@@ -39,10 +45,11 @@ body{
 }
 
 .logo{
-    font-size:6rem;
+    font-size:clamp(2.8rem,10vw,6rem);
     font-weight:900;
     color:#E50914;
     text-shadow:0 0 30px rgba(229,9,20,.8);
+    padding:0 15px;
 }
 
 .tagline{
@@ -61,6 +68,7 @@ body{
     font-size:1.2rem;
     font-weight:bold;
     cursor:pointer;
+    transition:.3s;
 }
 
 .watchBtn:hover{
@@ -123,6 +131,22 @@ body{
     cursor:pointer;
 }
 
+.backBtn{
+    background:rgba(255,255,255,.12);
+    backdrop-filter:blur(10px);
+    color:white;
+    border:1px solid rgba(255,255,255,.2);
+    padding:12px 24px;
+    border-radius:50px;
+    cursor:pointer;
+    transition:.3s;
+    margin-bottom:25px;
+}
+
+.backBtn:hover{
+    background:rgba(255,255,255,.2);
+}
+
 /* PLAYER PAGE */
 
 #playerPage{
@@ -143,15 +167,6 @@ body{
     color:#E50914;
     font-size:2rem;
     font-weight:bold;
-}
-
-.backBtn{
-    background:#222;
-    color:white;
-    border:none;
-    padding:12px 24px;
-    border-radius:6px;
-    cursor:pointer;
 }
 
 .videoContainer{
@@ -175,7 +190,11 @@ video{
 }
 
 .movieTitle{
-    font-size:2.8rem;
+    font-size:2.5rem;
+}
+
+.tagline{
+    font-size:1rem;
 }
 
 #movieDetails{
@@ -184,6 +203,15 @@ video{
 
 .description{
     font-size:1rem;
+}
+
+.playerTop{
+    flex-direction:column;
+    gap:15px;
+}
+
+.playerTitle{
+    font-size:1.3rem;
 }
 
 }
@@ -224,6 +252,10 @@ video{
 
 ```
 <div class="detailsContent">
+
+    <button class="backBtn" onclick="backToHome()">
+        ← Back
+    </button>
 
     <div class="movieTitle">
         District Six Live Show
@@ -300,7 +332,7 @@ function playMovie(){
     document.getElementById("movieDetails").style.display="none";
     document.getElementById("playerPage").style.display="block";
 
-    const movie=document.getElementById("movie");
+    const movie = document.getElementById("movie");
 
     setTimeout(function(){
         movie.play();
@@ -312,6 +344,13 @@ function backToMovie(){
 
     document.getElementById("playerPage").style.display="none";
     document.getElementById("movieDetails").style.display="flex";
+
+}
+
+function backToHome(){
+
+    document.getElementById("movieDetails").style.display="none";
+    document.getElementById("homePage").style.display="flex";
 
 }
 
